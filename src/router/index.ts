@@ -105,12 +105,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: { hideTabBar: true }
 
       },
-      // {
-      //   path:'detail',
-      //   component: () => import(/* webpackChunkName: "about" */ '../views/front/detail.vue'),
-      //   meta: { hideTabBar: true }
+      {
+        path:'details',
+        component: () => import(/* webpackChunkName: "about" */ '../views/front/details.vue'),
+        meta: { hideTabBar: true }
 
-      // },
+      },
       {
         path:'talk',
         component: () => import(/* webpackChunkName: "about" */ '../views/front/talk.vue'),

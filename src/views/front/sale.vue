@@ -12,7 +12,7 @@
         </van-sticky>
          
     </div>
-    <van-grid :column-num="4":border="false" style="margin-bottom: 0px;margin-top: 0px;">
+    <van-grid :column-num="4":border="false" style="margin-bottom: 0px;margin-top: -5px;">
         <van-grid-item :icon="require('../../assets/icons/car.png')" text="房车大全" to="search"/>
         <van-grid-item :icon="require('../../assets/icons/mc.png')" text="高价卖车" @click="tosalecar(0)"/>
         <van-grid-item :icon="require('../../assets/icons/gj.png')" text="免费估价" @click="tosalecar(1)"/>
@@ -83,15 +83,26 @@
         </div>
       </div>
     </div>
+    <div class="scroll-container">
+      <div class="scroll-content">
+        <van-card
+        v-for="(item, index) in total"
+        :key="index"
+        :price="(goods[index].price/10000).toFixed(2).concat('万')"
+        :desc="parseInt(goods[index].gap)/100+'万公里/'+goods[index].licensetime+'/'+goods[index].location"
+        :origin-price="(goods[index].oldprice/10000).toFixed(2).concat('万')"
+        :title="goods[index].brand"
+        @click="todetails(goods[index])"
+        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+        >
+        <template #tags v-if="goods[index].def1=='Y'">
+          <van-tag color="#d8c628">官方直营</van-tag>
+        </template>
+        </van-card>
+      </div>
+    </div>
     
-    <van-card
-    v-for="(item, index) in total"
-    :key="index"
-    :price="(goods[index].price/10000).toFixed(2).concat('万')"
-    desc="描述信息"
-    :title="goods[index].brand"
-    thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-    />
+    
     <van-popup
     v-model:show="showBottom"
     position="bottom"
@@ -158,29 +169,34 @@ const types = ref([
 const chassis = ref([
       { text: '不限', active: false,para:null },
       { text: '依维柯', active: false,para:'依维柯' },
-      { text: '大通', active: false,para:'大通' },
+      { text: '大众', active: false,para:'大众' },
       { text: '福特', active: false,para:'福特' },
-      { text: '跃进', active: false,para:'跃进' },
-      { text: '长城', active: false,para:'长城' },
+      { text: '道奇', active: false,para:'道奇' },
+      { text: '悍马', active: false,para:'悍马' },
       { text: '奔驰', active: false,para:'奔驰' },
-      { text: '长安', active: false,para:'长安' },
-      { text: '东风', active: false,para:'东风' },
+      { text: '吉普', active: false,para:'吉普' },
+      { text: '丰田', active: false,para:'丰田' },
       { text: '五菱', active: false,para:'五菱' },
-      { text: '爱科', active: false,para:'爱科' }
+      { text: '雷诺', active: false,para:'雷诺' },
+      { text: '马自达', active: false,para:'马自达' },
+      { text: '雪佛兰', active: false,para:'雪佛兰' },
+      { text: '铃木', active: false,para:'铃木' },
+      { text: '菲亚特', active: false,para:'菲亚特' },
+      { text: '路虎', active: false,para:'路虎' }
 ]);
 const age = ref([
-      { text: '不限', active: false },
+      { text: '不限', active: false,para:null },
       { text: '1年以内', active: false,para:'1' },
       { text: '3年以内', active: false,para:'3' },
       { text: '5年以内', active: false,para:'5' },
-      { text: '5年以上', active: false,para:'100' }
+      { text: '10年以内', active: false,para:'10' }
 ]);
 
 const stock=ref({
-  'price':price[index].para,
-  'chassis':chassis[index].para,
-  'type':types[index].para,
-  'age':age[index].para
+  price:'',
+  chassis:'',
+  type:'',
+  usetime:''
 })
   
 const toggleActive = (type, index) => {
@@ -188,15 +204,19 @@ let options;
     switch (type) {
     case 'price':
         options = price.value;
+        stock.value.price=price.value[index].para;
         break;
     case 'type':
         options = types.value;
+        stock.value.type=types.value[index].para;
         break;
     case 'chassis':
         options = chassis.value;
+        stock.value.chassis=chassis.value[index].para;
         break;
     case 'age':
         options = age.value;
+        stock.value.usetime=age.value[index].para;
         break;
     default:
         return;
@@ -206,6 +226,15 @@ options.forEach(item => {
 });
   
 options[index].active = true;
+// console.log(stock.value)
+api.postReq("9092/search",stock.value).then(res=>{
+    let result = res.data
+    total.value = result.data.total
+    // console.log(result)
+    // console.log(res.data.total)
+    goods.value=result.data.goods
+    })
+
 }
 const tosalecar = (index) => {
     router.push({
@@ -225,6 +254,14 @@ const init = ()=>{
     goods.value=result.data.goods
     })
 }
+const todetails=(item)=>{
+  router.push({
+    path:"details",
+    state:{goods: JSON.stringify(item)}
+    })
+
+
+}
 onMounted(()=>{
     init()
 })
@@ -234,6 +271,7 @@ onMounted(()=>{
   width: 100%;
   padding: 8px;
   background-color: #f7f8fc;
+  margin-top: -15px;
 }
 
 .filter-group {
@@ -283,6 +321,16 @@ onMounted(()=>{
 .filter-item.active {
   background-color: #42b983;
   color: white;
+  /* color: #d8c628; */
+}
+.scroll-container {
+  width: 100%;
+  flex: 1;
+  overflow: auto;
+}
+.scroll-content {
+  width: 100%; /* 内容宽度超出容器宽度 */
+  height: 400px; /* 内容高度超出容器高度 */
 }
 </style>
 

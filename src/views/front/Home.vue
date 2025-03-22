@@ -1,6 +1,6 @@
 <template>
     <RouterView/>
-    <van-tabbar v-model="active" route v-if="!$route.meta.hideTabBar" :placeholder="true">
+    <van-tabbar v-model="active" route v-if="!$route.meta.hideTabBar" class="vh">
           <van-tabbar-item icon="home-o" to="/home/index">首页</van-tabbar-item>
           <van-tabbar-item icon="exchange" to="/home/sale">二手</van-tabbar-item>
           <van-tabbar-item icon="search" to="/home/search">选车</van-tabbar-item>
@@ -16,4 +16,5 @@ import {onMounted, ref} from "vue"
 </script>
     
 <style scoped>
+
 </style>

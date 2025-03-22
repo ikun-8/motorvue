@@ -9,14 +9,14 @@
       <van-form @submit="onSubmit">
         <van-cell-group inset>
           <van-field
-            v-model="user.uAccount"
+            v-model="user.name"
             name="用户名"
             label="用户名"
             placeholder="用户名"
             :rules="[{ required: true, message: '请填写用户名' }]"
           />
           <van-field
-            v-model="user.uPassword"
+            v-model="user.password"
             type="password"
             name="密码"
             label="密码"
@@ -42,27 +42,24 @@
 import {ref} from "vue"
 import api from '../api/index'
 import router from "@/router";
-// import { useRouter } from "vue-router";
-
-// const router = useRouter();
 
 const user=ref({
-  uAccount:'',
-  uPassword:''
+  name:'',
+  password:''
 })
 const onSubmit = () => {
-    console.log('submit', user.value);
-    api.postReq("/user/login",user.value).then(res=>{
-      if(res.data.code==1){
+    api.postReq("9090/user/login",user.value).then(res=>{
+      if(res.data.code==200){
         ElMessage.success(res.data.msg);
         localStorage.setItem("userInfo",JSON.stringify(res.data.data))
         console.log(res.data.data)
-        if(res.data.data.identity==1){
-          router.push("/gaver")
-        }
-        else{
-          router.push("/home/demo1")
-        }
+        // if(res.data.data.identity==1){
+        //   router.push("/gaver")
+        // }
+        // else{
+        //   router.push("/home/demo1")
+        // }
+        router.push("/home")
       }
       else
         ElMessage.error(res.data.msg);
