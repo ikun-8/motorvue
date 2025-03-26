@@ -227,7 +227,7 @@ options.forEach(item => {
   
 options[index].active = true;
 // console.log(stock.value)
-api.postReq("9092/search",stock.value).then(res=>{
+api.postReq("/goods-service/goods/search",stock.value).then(res=>{
     let result = res.data
     total.value = result.data.total
     // console.log(result)
@@ -246,7 +246,7 @@ const poup=()=>{
     showBottom.value=true
 }
 const init = ()=>{
-    api.postReq("/show").then(res=>{
+    api.postReq("/goods-service/goods/show").then(res=>{
     let result = res.data
     total.value = result.data.total
     // console.log(result)

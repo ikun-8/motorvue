@@ -21,13 +21,13 @@
         height="60px"
         src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
         />
-        <p style="margin-left: 20px;margin-top: 0px;color: white;">namenamename</p>
+        <p style="margin-left: 20px;margin-top: 0px;color: white;">{{user.name}}</p>
         <div style="flex-direction: row;display: flex;margin-top: -25px;">
-            <p style="padding-left: 20px;color: white;">人气</p>
+            <p style="padding-left: 20px;color: white;">{{user.def1}}人气</p>
             <p style="padding-left: 20px;color: white;">|</p>
-            <p style="padding-left: 20px;color: white;">关注</p>
+            <p style="padding-left: 20px;color: white;">{{user.concern}}关注</p>
             <p style="padding-left: 20px;color: white;">|</p>
-            <p style="padding-left: 20px;color: white;">粉丝</p>
+            <p style="padding-left: 20px;color: white;">{{user.fans}}粉丝</p>
         </div>
         <div style="margin-left: 20px;margin-top: -10px;">
             <van-tag type="warning" round>lv1</van-tag>
@@ -107,7 +107,13 @@
             </div>
         </van-tab>
         <van-tab title="帖子">
-            <van-empty description="暂时没有消息哦" />
+            <van-card
+            v-for="(item, index) in total"
+            :key="index"
+            :desc="formatDate(mesBody[index].time)"
+            :title="mesBody[index].content"
+            />
+            <van-empty v-if="total==0" description="暂时没有消息哦" />
         </van-tab>
         <van-tab title="日志">
             <van-empty description="暂时没有消息哦" />
@@ -130,18 +136,64 @@
 <script setup>
 import { onMounted,ref } from 'vue';
 import router from '@/router';
+import api from '../../api/index'
+import { formatter } from 'element-plus';
+import { dayjs } from 'element-plus';
 
 const num=ref(0)
+const total=ref()
 const onClickLeft = () => history.back();
+const mesBody=ref({
+    mid:'',
+    uid:'',
+    time:'',
+    content:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
+const user=ref({
+    id:'',
+    name:'',
+    password:'',
+    qq:'',
+    wx:'',
+    address:'',
+    points:'',
+    headpic:'',
+    fans:'',
+    concern:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
 onMounted(()=>{
     num.value=history.state.active
     // console.log(num.value)
+    init()
 })
 const tocenter = () => {
     router.push({
     path:"center"
     })
 };
+const formatDate=(date)=>{
+    return dayjs(date).format('YYYY-MM-DD hh:MM:ss')
+
+}
+const init=()=>{
+    user.value=JSON.parse(localStorage.getItem("userInfo"))
+    api.postReq("9091/mes/searchBody?uid="+user.value.id,{}).then(res=>{
+    let result = res.data
+    total.value = result.data.total
+    // console.log(result.data.mesbody)
+    // console.log(total.value)
+    mesBody.value=result.data.mesBody
+    })
+
+}
 
 
 

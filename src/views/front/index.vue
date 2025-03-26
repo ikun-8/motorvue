@@ -15,8 +15,9 @@
     <div id="main">
         <van-tabs v-model:active="active" sticky>
           <van-tab title="关注">
-            <div style="margin-left: 5px;" v-for="value in 9">
-              <p>title</p>
+            <div style="margin-left: 5px;" v-for="i in mes">
+              <div v-if="i.type=='1'">
+                <p>{{i.title}}</p>
               <van-row justify="space-around">
                 <van-col span="8">
                   <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -31,15 +32,14 @@
               <div style="display: flex;">
                 <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                 <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
-                <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                  <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
-                  <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                  <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
-                  <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                  <p style="font-size: 14px;">{{talk}}</p>
-                </div>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
               </div>
               <van-divider />
+              </div>
             </div>
           </van-tab>
           <van-tab title="首页">
@@ -61,8 +61,9 @@
                   <van-grid-item :icon="require('../../assets/icons/kzh.png')" text="看展会" />
                   <van-grid-item :icon="require('../../assets/icons/wfc2.png')" text="玩房车" to="active" />
               </van-grid>
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='2'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -78,14 +79,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
           </van-tab>
@@ -101,8 +103,9 @@
                 </template>
               </van-swipe>
 
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='3'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -118,14 +121,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.lenth}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>                
               </div>
             </div>
           </van-tab>
@@ -141,8 +145,9 @@
                 </template>
               </van-swipe>
 
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='4'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -158,14 +163,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
             
@@ -182,8 +188,9 @@
                 </template>
               </van-swipe>
 
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='5'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -199,14 +206,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
           </van-tab>
@@ -222,8 +230,9 @@
                 </template>
               </van-swipe>
 
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='6'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -239,21 +248,23 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.left}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
           </van-tab>
           <van-tab title="新闻">
             <div>
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='7'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -269,14 +280,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
           </van-tab>
@@ -292,8 +304,9 @@
                 </template>
               </van-swipe>
 
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='8'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -309,14 +322,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
           </van-tab>
@@ -332,8 +346,9 @@
                 </template>
               </van-swipe>
 
-              <div style="margin-left: 5px;" v-for="value in 9">
-                <p>title</p>
+              <div style="margin-left: 5px;" v-for="i in mes">
+                <div v-if="i.type=='9'">
+                  <p>{{i.title}}</p>
                 <van-row justify="space-around">
                   <van-col span="8">
                     <van-image width="110" height="110" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
@@ -349,14 +364,15 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{time}}</p>
+                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{watch}}</p>
+                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{talk}}</p>
+                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
+                </div>
               </div>
             </div>
           </van-tab>
@@ -366,12 +382,27 @@
     </div>
 </template>
 <script setup>
-import {ref} from 'vue'
-const watch=ref(5678)
-const talk=ref(56)
-const time=ref('2024-09-15')
-const active=ref(0)
+import {onMounted, ref} from 'vue'
+import api from '../../api/index'
 
+const total=ref()
+
+const mes=ref([])
+const init=()=>{
+  // for(let i=0;i<9;i++){
+    api.postReq("/mes-service/mes/show",{}).then(res=>{
+      let result = res.data
+      total.value = result.data.total
+
+      console.log(total.value)
+      mes.value=result.data.mes
+        console.log(mes.value)
+    })
+    
+}
+onMounted(()=>{
+  init()
+})
 </script>
 <style>
 .van-tabs__nav {

@@ -12,12 +12,10 @@
         <div style="background-color: #ffcc32;height: 120px;width: 100%;"></div>
         <div class="first">
         
-            <p style="margin-left: 3%;margin-top: 45px; font-size: 20px;">name</p>
-            <p style="margin-left: 32%;margin-top: 45px; font-size: 12px;color: #999999;">帖子</p>
+            <p style="margin-left: 3%;margin-top: 45px; font-size: 20px;">{{user.name}}</p>
+            <p style="margin-left: 40%;margin-top: 45px; font-size: 12px;color: #999999;">{{user.concern}}关注</p>
             <p style="margin-left: 5%;margin-top: 45px;color: #f7f8fc;">|</p>
-            <p style="margin-left: 5%;margin-top: 45px; font-size: 12px;color: #999999;">关注</p>
-            <p style="margin-left: 5%;margin-top: 45px;color: #f7f8fc;">|</p>
-            <p style="margin-left: 5%;margin-top: 45px; font-size: 12px;color: #999999;">粉丝</p>
+            <p style="margin-left: 5%;margin-top: 45px; font-size: 12px;color: #999999;">{{user.fans}}粉丝</p>
 
         </div>
         <van-image
@@ -62,7 +60,26 @@
 </template>   
 <script setup>
 const onClickLeft = () => history.back();
+import { ref,onMounted } from "vue";
 import { useRouter } from "vue-router";
+
+
+const user=ref({
+    id:'',
+    name:'',
+    password:'',
+    qq:'',
+    wx:'',
+    address:'',
+    points:'',
+    headpic:'',
+    fans:'',
+    concern:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
 
 const router = useRouter();
 const myfans = (index) => {
@@ -71,6 +88,13 @@ const myfans = (index) => {
     state:{active: index}
     })
 };
+const init=()=>{
+    user.value=JSON.parse(localStorage.getItem("userInfo"))
+    // console.log(user.name)
+}
+onMounted(()=>{
+    init()
+})
 </script>
 <style scoped> 
     .block{

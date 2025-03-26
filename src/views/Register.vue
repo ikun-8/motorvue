@@ -48,17 +48,18 @@ const user=ref({
 })
 const onSubmit = () => {
     console.log('submit', user.value);
-    api.postReq("/user/login",user.value).then(res=>{
+    api.postReq("/user/register",user.value).then(res=>{
       if(res.data.code==1){
         ElMessage.success(res.data.msg);
         localStorage.setItem("userInfo",JSON.stringify(res.data.data))
         console.log(res.data.data)
-        if(res.data.data.identity==1){
-          router.push("/gaver")
-        }
-        else{
-          router.push("/home/demo1")
-        }
+        // if(res.data.data.identity==1){
+        //   router.push("/gaver")
+        // }
+        // else{
+        //   router.push("/home/demo1")
+        // }
+        router.push("/home")
       }
       else
         ElMessage.error(res.data.msg);

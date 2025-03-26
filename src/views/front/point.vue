@@ -12,14 +12,14 @@
     <van-tab title="我的">
         <div class="head">
             <p style="font-size: 20px;margin-left: 5px;padding-top: 10px;margin-bottom: -20px;">积分:</p>
-            <p style="font-size: 36px;margin-bottom: 10px;margin-left: 10px;">{{point}}</p>
+            <p style="font-size: 36px;margin-bottom: 10px;margin-left: 10px;">{{user.point}}</p>
             <p style="font-size: 15px;color: gray;margin-left: 5px;">总积分=发帖数+精华帖数X5+威望X2</p>
         </div>
         <div>
             <van-cell>
                 <template #title>
                     <span class="custom-title">车币</span>
-                    {{k}}
+                    {{u}}
                 </template>
             </van-cell>
             <van-cell>
@@ -45,11 +45,38 @@
   </van-tabs>
 </template>
 <script setup>
-const k=1
-const s=2
-const g=3
-const point=3
+import {ref,onMounted} from 'vue'
 const onClickLeft=()=>history.back()
+const user=ref({
+    id:'',
+    name:'',
+    password:'',
+    qq:'',
+    wx:'',
+    address:'',
+    points:'',
+    headpic:'',
+    fans:'',
+    concern:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
+const init=()=>{
+    user.value=JSON.parse(localStorage.getItem("userInfo"))
+    // console.log(user.name)
+    // api.postReq("9092/search",stock.value).then(res=>{
+    // let result = res.data
+    // total.value = result.data.total
+    // // console.log(result)
+    // // console.log(res.data.total)
+    // goods.value=result.data.goods
+    // })
+}
+onMounted(()=>{
+    init()
+})
 
 
 </script>

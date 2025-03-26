@@ -9,7 +9,8 @@
             </template>
           </van-nav-bar>
             <van-search
-            v-model="value"
+            :onchange="search()"
+            v-model="content"
             shape="round"
             background="#ffcc32"
             placeholder="搜索感兴趣的活动"/>
@@ -32,20 +33,28 @@
     <van-nav-bar class="divide" title="热门推荐"/>
     <div>
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-            <van-list
-                v-model:loading="loading"
-                :finished="finished"
-                finished-text="没有更多了"
-                @load="onLoad">
-                <van-cell v-for="item in list" :key="item" :title="item" />
-            </van-list>
+          <van-card
+          v-for="(item, index) in total"
+          :key="index"
+          :desc="mes[index].time+'开始'"
+          :title="mes[index].title"
+          @click="todetails(mes[index])"
+          thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+        >
+        <template #tags>
+          <van-tag plain type="success" v-if="mes[index].def1=='O'">活动进行中</van-tag>
+          <van-tag plain type="warning" v-if="mes[index].def1=='C'">活动已结束</van-tag>
+        </template>
+        </van-card>
         </van-pull-refresh>
     </div>
     
   
 </template>
 <script setup>
-    import {ref,reactive, onMounted} from "vue"
+    import {ref, onMounted} from "vue"
+    import api from '../../api/index'
+    import router from "@/router";
     const images = [
       'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
       'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
@@ -55,6 +64,8 @@
     const finished = ref(false);
     const refreshing = ref(false);
     const onClickLeft = () => history.back();
+    const mes=ref()
+    const content=ref()
 
     const onLoad = () => {
       setTimeout(() => {
@@ -83,6 +94,33 @@
       loading.value = true;
       onLoad();
     };
+    
+    const total=ref()
+    const init=()=>{
+      api.postReq("/mes-service/mes/show?type=9").then(res=>{
+      let result = res.data
+      total.value = result.data.total
+      // console.log(result)
+      // console.log(res.data.total)
+      mes.value=result.data.mes
+      })
+
+    }
+    const search=()=>{
+      api.postReq("/mes-service/mes/search?content="+content.value,{}).then(res=>{
+      let result = res.data
+      total.value = result.data.total
+    console.log(result)
+    // console.log(res.data.total)
+      mes.value=result.data.mes
+      // init()
+    })
+
+    }
+    onMounted(()=>{
+      init()
+
+    })
     
 </script>
   
