@@ -32,11 +32,13 @@
               <div style="display: flex;">
                 <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                 <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
+                </div>
               </div>
               <van-divider />
               </div>
@@ -79,11 +81,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -121,11 +123,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.lenth}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.lenth}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -163,11 +165,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -206,11 +208,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -248,11 +250,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.left}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -280,11 +282,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -322,11 +324,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -364,11 +366,11 @@
                   <van-image round width="20" height="20" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                   <van-tag type="success" style="height: 20px;width: 25px;margin-left: 10px;">标签</van-tag>
                   <div style="flex-direction: row;display: flex;margin-top: -11px;margin-left: 20px;">
-                    <p style="margin-right: 100px;font-size: 14px;">{{i.time}}</p>
+                    <p style="margin-right: 75px;font-size: 11px;">{{i.time}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/watch.png')"/>
-                    <p style="margin-right: 10px;font-size: 14px;">{{i.watch}}</p>
+                    <p style="margin-right: 5px;font-size: 14px;">{{i.watch}}</p>
                     <van-image style="margin-top: 15px;" width="15px" height="15px" :src="require('../../assets/icons/talk.png')"/>
-                    <p style="font-size: 14px;">{{i.mesbodyList.length}}</p>
+                    <p style="font-size: 14px;" @click="showMes(i.id)">{{i.mesbodyList.length}}</p>
                   </div>
                 </div>
                 <van-divider />
@@ -377,6 +379,31 @@
             </div>
           </van-tab>
         </van-tabs>
+        <van-popup
+        v-model:show="open"
+        position="bottom"
+        :style="{ height: '30%' }"
+        >
+          <van-list
+           v-model:loading="loading"
+           :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <van-cell v-for="item in mesbody" :title="item.content" :value="item.time"/>
+        </van-list>
+        <van-cell-group inset>
+        <van-field
+          v-model="sms"
+          center
+          clearable
+          >
+          <template #button>
+            <van-button size="small" type="primary" @click="send()">评论</van-button>
+          </template>
+        </van-field>
+        </van-cell-group>
+        </van-popup>
         
   
     </div>
@@ -386,20 +413,89 @@ import {onMounted, ref} from 'vue'
 import api from '../../api/index'
 
 const total=ref()
+const open=ref()
+const mesbody=ref([])
+const loading = ref(false);
+const finished = ref(false);
+const sms=ref()
+const discuss=ref({
+  mid:'',
+  uid:'',
+  time:'',
+  content:'',
+  def1:'',
+  def2:'',
+  def3:'',
+  def4:''
 
+})
+const user=ref({
+    id:'',
+    name:'',
+    password:'',
+    qq:'',
+    wx:'',
+    address:'',
+    points:'',
+    headpic:'',
+    fans:'',
+    concern:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
 const mes=ref([])
 const init=()=>{
-  // for(let i=0;i<9;i++){
+    user.value=JSON.parse(localStorage.getItem("userInfo"))
     api.postReq("/mes-service/mes/show",{}).then(res=>{
       let result = res.data
       total.value = result.data.total
 
       console.log(total.value)
       mes.value=result.data.mes
-        console.log(mes.value)
-    })
-    
+        // console.log(mes.value)
+    })   
 }
+const date = new Date();
+const showMes=(index)=>{
+  open.value=true
+  mesbody.value=mes.value[index-1].mesbodyList
+  discuss.value.mid=index
+  discuss.value.uid=user.value.id
+  // const currentTime=
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let seconds = date.getSeconds();
+
+  discuss.value.time=`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  // discuss.value.time=currentDate
+  // .toLocaleDateString()
+  // console.log(mes.value[index-1].mesbodyList)
+
+}
+const onLoad = () => {
+    setTimeout(() => {
+      loading.value = false;
+      finished.value = true;
+    }, 1000);
+};
+const send = () => {
+  // .toLocaleDateString()
+  discuss.value.content=sms.value
+  console.log(discuss.value)
+  api.postReq("/mes-service/mes/addBody",discuss.value).then(res=>{
+    console.log(res.data.msg)
+    open.value=false
+    init()
+    sms.value=''
+
+    })   
+    
+};
 onMounted(()=>{
   init()
 })
