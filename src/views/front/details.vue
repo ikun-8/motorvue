@@ -96,14 +96,17 @@
         <van-image width="100%" height="180px" :src="require('../../assets/icons/talk2.png')"/>
       </div>
       <div class="bottom-nav">
-        <div class="nav-item">
+          <div class="nav-item">
+        <van-badge :content="num">
           <van-image
-            @click="showBottom=true"
+            @click="openm=true"
             width="24"
             height="24"
             :src="require('../../assets/icons/talk2.png')"
             />
+        </van-badge>
         </div>
+        
         <div class="nav-item">
           <van-image
           v-if="isFavorite==false"
@@ -133,28 +136,42 @@
       </div>
     </div>
     <van-popup
-    closeable
-    v-model:show="showBottom"
-    position="bottom"
-    :style="{ height: '30%' }"
-    >
-    <van-cell-group inset>
-    <van-field
-        v-model="message"
-        rows="4"
-        autosize
-        type="textarea"
-        placeholder="说点什么吧"
-    />
-    </van-cell-group>
+        v-model:show="openm"
+        position="bottom"
+        :style="{ height: '30%' }"
+        >
+          <van-list
+           v-model:loading="loading"
+           :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <van-cell v-for="item in mesbody" :title="item.content" :value="item.time"/>
+        </van-list>
+        <van-cell-group inset>
+        <van-field
+          v-model="sms"
+          center
+          clearable
+          >
+          <template #button>
+            <van-button size="small" type="primary" @click="send()">评论</van-button>
+          </template>
+        </van-field>
+        </van-cell-group>
     </van-popup>
 </template>
   
 <script setup>
+
 import { ref,onMounted } from 'vue';
 import { useRouter } from "vue-router";
+import api from '../../api/index'
 const router = useRouter();
-const showBottom = ref(false)
+const openm = ref(false);
+const sms = ref();
+const num = ref(0);
+const mesbody = ref([]);
 const goods=ref({
     id:null,
     uid:null,
@@ -179,6 +196,43 @@ const goods=ref({
     def4:null
 
 })
+const discuss=ref({
+  mid:'',
+  uid:'',
+  time:'',
+  content:'',
+  def1:'',
+  def2:'',
+  def3:'',
+  def4:''
+
+})
+const collect=ref({
+    uid:null,
+    gid:null,
+    sttus:null,
+    def1:'',
+    def2:null,
+    def3:null,
+    def4:null
+
+})
+const user=ref({
+    id:'',
+    name:'',
+    password:'',
+    qq:'',
+    wx:'',
+    address:'',
+    points:'',
+    headpic:'',
+    fans:'',
+    concern:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
 const init=()=>{
     let money,oldmoney
     goods.value=JSON.parse(history.state.goods)
@@ -188,7 +242,38 @@ const init=()=>{
     goods.value.price=money.toFixed(2)
     goods.value.oldprice=oldmoney.toFixed(2)
     console.log(goods.value.price)
+    user.value=JSON.parse(localStorage.getItem("userInfo"))
+    collect.value.uid=JSON.parse(localStorage.getItem("userInfo")).id
+    collect.value.gid=goods.value.id
+    discuss.value.uid=user.value.id
+    discuss.value.mid=goods.value.id
+    api.postReq("/user-service/user/queCollect",collect.value).then(res=>{
+      let result = res.data
+      // console.log(result)
+      if(result.code=='200')
+      isFavorite.value=true
+    }) 
+    api.postReq("/mes-service/mes/queBody?mid="+goods.value.id).then(res=>{
+      let result = res.data
+      num.value=result.data.total
+      // console.log(result.data)
+      // console.log(result.data.mesBody)
+      mesbody.value=result.data.mesBody
+
+    }) 
 }
+const send = () => {
+  // .toLocaleDateString()
+  discuss.value.content=sms.value
+  console.log(discuss.value)
+  api.postReq("/mes-service/mes/addBody",discuss.value).then(res=>{
+    console.log(res.data.msg)
+    open.value=false
+    init()
+    sms.value=''
+    })   
+    
+};
 onMounted(()=>{
     init()
 
@@ -204,11 +289,27 @@ const isFavorite = ref(false);
 // 切换收藏状态
 const toggleFavorite = () => {
   isFavorite.value = !isFavorite.value;
+  // console.log(collect.value)
+  if(isFavorite.value==true){
+    api.postReq("/user-service/user/addCollect",collect.value).then(res=>{
+      let result = res.data
+        console.log(res.data.msg)
+    })  
+
+  }else{
+    api.postReq("/user-service/user/revCollect",collect.value).then(res=>{
+      let result = res.data
+        console.log(res.data.msg)
+    }) 
+
+  }
+  
 };
 // 返回上一页
 const onClickLeft = () =>history.back();
 // 打开聊天
 const openChat = () => {
+  openm.value=true
   
 };
 // 联系卖家
