@@ -170,6 +170,7 @@ import api from '../../api/index'
 const router = useRouter();
 const openm = ref(false);
 const sms = ref();
+const gid = ref();
 const num = ref(0);
 const mesbody = ref([]);
 const goods=ref({
@@ -314,7 +315,11 @@ const openChat = () => {
 };
 // 联系卖家
 const contactSeller = () => {
-  alert('联系卖家功能');
+    router.push({
+    path:"toOrder",
+    state:{goods: JSON.stringify(goods.value)}
+    })
+  
 };
 // 咨询底价
 const inquirePrice = () => {

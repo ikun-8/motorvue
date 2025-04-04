@@ -48,7 +48,7 @@ const user=ref({
   password:''
 })
 const onSubmit = () => {
-    api.postReq("9090/user/login",user.value).then(res=>{
+    api.postReq("/user-service/user/login",user.value).then(res=>{
       if(res.data.code==200){
         ElMessage.success(res.data.msg);
         localStorage.setItem("userInfo",JSON.stringify(res.data.data))

@@ -9,7 +9,23 @@
         </van-nav-bar>
     </van-sticky>
     <van-tabs v-model:active="active" sticky>
-        <van-tab title="商品">
+      <van-tab title="商品">
+      <van-card
+        v-for="(item, index) in total"
+        :key="index"
+        :price="(goods[index].price/10000).toFixed(2).concat('万')"
+        :desc="parseInt(goods[index].gap)/100+'万公里/'+goods[index].licensetime+'/'+goods[index].location"
+        :origin-price="(goods[index].oldprice/10000).toFixed(2).concat('万')"
+        :title="goods[index].brand"
+        @click="todetails(goods[index])"
+        thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+        >
+        <template #tags v-if="goods[index].def1=='Y'">
+          <van-button square text="删除" type="danger" class="delete-button" />
+        </template>
+        </van-card>
+      </van-tab>
+        <!-- <van-tab title="商品">
             <div v-for="value in 9">
                 <van-swipe-cell>
                     <van-card
@@ -24,7 +40,7 @@
                     </template>
                 </van-swipe-cell>
             </div>
-        </van-tab>
+        </van-tab> -->
         <van-tab title="文章">
             <div v-for="value in 9">
               <div style="margin-left: 5px;">
@@ -92,13 +108,29 @@
 </template>
 <script setup>
 import {onMounted, ref} from 'vue'
+import api from '../../api/index'
 const onClickLeft=()=>history.back()
 const watch=ref(5678)
 const talk=ref(56)
 const time=ref('2024-09-15')
 const active=ref()
+const uid=ref()
+const goods=ref([])
+const showgoods=()=>{
+  uid.value=JSON.parse(localStorage.getItem("userInfo")).id
+  console.log(uid.value)
+  api.postReq("/user-service/user/listCollect?uid="+uid.value).then(res=>{
+      let result = res.data
+      console.log(result)
+      goods.value=result.data.cols
+
+    }) 
+
+}
+
 onMounted(()=>{
     active.value=history.state.active
+    showgoods()
 
 })
 

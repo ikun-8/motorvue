@@ -170,6 +170,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "about" */ '../views/front/release.vue'),
 
       },
+      {
+        path:'toOrder',
+        component: () => import(/* webpackChunkName: "about" */ '../views/front/order.vue'),
+
+      },
       
  
     ]
