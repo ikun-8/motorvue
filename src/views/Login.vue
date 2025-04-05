@@ -24,6 +24,17 @@
             :rules="[{ required: true, message: '请填写密码' }]"
           />
         </van-cell-group>
+        <div style="flex-direction: row;display: flex;">
+          <van-field
+          v-model="user.captcha"
+          clearable
+          label="验证码"
+          placeholder="请输入验证码"
+          >
+          </van-field>
+          <img src="http://localhost:9090/user-service/user/getCode" class="pull-right" id="captcha" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
+
+        </div>
         <div style="margin: 16px;">
           <van-button round block type="primary" native-type="submit">
             登录
@@ -45,10 +56,12 @@ import router from "@/router";
 
 const user=ref({
   name:'',
-  password:''
+  password:'',
+  captcha:''
 })
 const onSubmit = () => {
     api.postReq("/user-service/user/login",user.value).then(res=>{
+      console.log(res.data)
       if(res.data.code==200){
         ElMessage.success(res.data.msg);
         localStorage.setItem("userInfo",JSON.stringify(res.data.data))

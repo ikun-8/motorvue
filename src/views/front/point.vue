@@ -12,26 +12,26 @@
     <van-tab title="我的">
         <div class="head">
             <p style="font-size: 20px;margin-left: 5px;padding-top: 10px;margin-bottom: -20px;">积分:</p>
-            <p style="font-size: 36px;margin-bottom: 10px;margin-left: 10px;">{{user.point}}</p>
+            <p style="font-size: 36px;margin-bottom: 10px;margin-left: 10px;">{{user.points}}</p>
             <p style="font-size: 15px;color: gray;margin-left: 5px;">总积分=发帖数+精华帖数X5+威望X2</p>
         </div>
         <div>
             <van-cell>
                 <template #title>
                     <span class="custom-title">车币</span>
-                    {{u}}
+                    {{user.carcoins}}
                 </template>
             </van-cell>
             <van-cell>
                 <template #title>
                     <span class="custom-title">威望：</span>
-                    {{s}}
+                    {{user.prestige}}
                 </template>
             </van-cell>
             <van-cell>
                 <template #title>
                     <span class="custom-title">金币：</span>
-                    {{g}}
+                    {{user.coins}}
                 </template>
             </van-cell>
         </div>
@@ -51,6 +51,10 @@ const user=ref({
     id:'',
     name:'',
     password:'',
+    date:'',
+    prestige:'',
+    coins:'',
+    carcoins:'',
     qq:'',
     wx:'',
     address:'',

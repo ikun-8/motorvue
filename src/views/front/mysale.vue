@@ -14,8 +14,8 @@
             <div style="flex-direction: row;display: flex;">
                 <van-image round width="3rem" height="3rem" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"/>
                 <div style="margin-left: 10px;">
-                    <p style="margin-bottom: 0px;">{{name}}</p>
-                    <van-tag color="#808080" round type="primary">uid:{{uid}}</van-tag>
+                    <p style="margin-bottom: 0px;">{{user.name}}</p>
+                    <van-tag color="#808080" round type="primary">uid:{{user.id}}</van-tag>
                 </div>
             </div>
         </div>
@@ -24,19 +24,19 @@
                 <van-cell title="我的交易" />
             </van-cell-group>
             <div class="container">
-                <p style="color:#19afeb;">{{sign}}</p>
+                <p style="color:#19afeb;">{{gtotal}}</p>
                 <p style="margin-top: -10px;">我发布的</p>
             </div>
-            <div class="container">
-                <p style="color:#19afeb;">{{sign}}</p>
-                <p style="margin-top: -10px;">我卖出的</p>
-            </div>
-            <div class="container">
-                <p style="color:#19afeb;">{{sign}}</p>
+            <div class="container" @click="tobsc(1)">
+                <p style="color:#19afeb;">{{btotal}}</p>
                 <p style="margin-top: -10px;">我买到的</p>
             </div>
-            <div class="container">
-                <p style="color:#19afeb;">{{sign}}</p>
+            <div class="container" @click="tobsc(2)">
+                <p style="color:#19afeb;">{{stotal}}</p>
+                <p style="margin-top: -10px;">我卖出的</p>
+            </div>
+            <div class="container" @click="tocllect">
+                <p style="color:#19afeb;">{{ctotal}}</p>
                 <p style="margin-top: -10px;">我收藏的</p>
             </div>
         </div>
@@ -61,11 +61,83 @@
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import api from '../../api/index'
+import { useRouter } from "vue-router";
 
-const name=ref('ikunikun')
-const uid=ref(2.5)
-const sign=ref(2)
+const gtotal=ref()
+const ctotal=ref()
+const btotal=ref()
+const stotal=ref()
+const bsale=ref([])
+const ssale=ref([])
+const router = useRouter();
 const onClickLeft=()=>history.back()
+const user=ref({
+    id:'',
+    name:'',
+    password:'',
+    date:'',
+    prestige:'',
+    coins:'',
+    carcoins:'',
+    qq:'',
+    wx:'',
+    address:'',
+    points:'',
+    headpic:'',
+    fans:'',
+    concern:'',
+    def1:'',
+    def2:'',
+    def3:'',
+    def4:''
+})
+const goods=ref({
+    uid:''
+})
+const init=()=>{
+    user.value=JSON.parse(localStorage.getItem("userInfo"))
+    goods.value.uid=user.value.id
+    api.postReq("/goods-service/goods/search",goods.value).then(res=>{
+    let result = res.data
+    gtotal.value = result.data.total
+    // console.log(result.data)
+    })
+    api.postReq("/user-service/user/listCollect?uid="+user.value.id).then(res=>{
+      let result = res.data
+      ctotal.value=result.data.total
+    }) 
+    api.postReq("/sale-service/sale/searchByb?buyer="+user.value.id).then(res=>{
+      let result = res.data
+    //   console.log(result.data)
+      btotal.value=result.data.total
+      bsale.value=result.data.sales
+    //   console.log(bsale.value)
+    })
+    api.postReq("/sale-service/sale/searchBys?seller="+user.value.id).then(res=>{
+      let result = res.data
+    //   console.log(result)
+      stotal.value=result.data.total
+      ssale.value=result.data.sales
+    }) 
+}
+const tocllect=(index)=>{
+    router.push({
+    path:"collect",
+    state:{active: index}
+    })
+}
+const tobsc=(index)=>{
+    router.push({
+    path:"tobsc",
+    state:{type: index}
+    })
+    
+    
+}
+onMounted(()=>{
+    init()
+})
   
   
 

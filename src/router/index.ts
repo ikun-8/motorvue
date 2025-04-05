@@ -175,6 +175,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "about" */ '../views/front/order.vue'),
 
       },
+      {
+        path:'tobsc',
+        component: () => import(/* webpackChunkName: "about" */ '../views/front/bsc.vue'),
+        meta: { hideTabBar: true }
+
+      },
       
  
     ]

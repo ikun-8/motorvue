@@ -75,22 +75,22 @@
                     <van-row :gutter="0">
                         <van-col span="12">
                             <van-cell-group>
-                                <van-cell title="积分" value="0" />
+                                <van-cell title="积分" :value=user.points />
                             </van-cell-group>
                         </van-col>
                         <van-col span="12">
                             <van-cell-group>
-                                <van-cell title="威望" value="12" />
+                                <van-cell title="威望" :value=user.prestige />
                             </van-cell-group>
                         </van-col>
                         <van-col span="12">
                             <van-cell-group>
-                                <van-cell title="金币" value="内容" />
+                                <van-cell title="金币" :value=user.coins />
                             </van-cell-group>
                         </van-col>
                         <van-col span="12">
                             <van-cell-group>
-                                <van-cell title="车币" value="内容" />
+                                <van-cell title="车币" :value=user.carcoins />
                             </van-cell-group>
                         </van-col>
                     </van-row>
@@ -98,7 +98,7 @@
                 <br>
                 <div>
                     <van-cell-group>
-                        <van-cell title="用户ID" value="内容" />
+                        <van-cell title="用户ID" :value=user.id />
                         <van-cell title="在线时间" value="内容" />
                         <van-cell title="注册时间" value="内容" />
                         <van-cell title="最后访问" value="内容" />
@@ -157,6 +157,10 @@ const user=ref({
     id:'',
     name:'',
     password:'',
+    date:'',
+    prestige:'',
+    coins:'',
+    carcoins:'',
     qq:'',
     wx:'',
     address:'',
@@ -185,10 +189,11 @@ const formatDate=(date)=>{
 }
 const init=()=>{
     user.value=JSON.parse(localStorage.getItem("userInfo"))
-    api.postReq("9091/mes/searchBody?uid="+user.value.id,{}).then(res=>{
+    console.log(user.value)
+    api.postReq("/mes-service/mes/searchBody?uid="+user.value.id,{}).then(res=>{
     let result = res.data
     total.value = result.data.total
-    // console.log(result.data.mesbody)
+    console.log(result.data)
     // console.log(total.value)
     mesBody.value=result.data.mesBody
     })

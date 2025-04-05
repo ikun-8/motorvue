@@ -48,6 +48,9 @@ const date = new Date();
 const sale=ref({
     time:null,
     goodsid:null,
+    buyer:null,
+    status:null,
+    seller:null,
     def1:null,
     def2:null,
     def3:null,
@@ -95,7 +98,7 @@ const onSubmit=()=>{
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
     sale.value.time=`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    // console.log(sale.value)
+    console.log(sale.value)
     api.postReq("/sale-service/sale/add",sale.value).then(res=>{
       let result = res.data
       console.log(result)
@@ -107,7 +110,10 @@ const onSubmit=()=>{
 
 }
 onMounted(()=>{
-    sale.value.def1=JSON.parse(localStorage.getItem("userInfo")).id
+    sale.value.buyer=JSON.parse(localStorage.getItem("userInfo")).id
+    sale.value.seller=JSON.parse(history.state.goods).id
+    sale.value.def1=JSON.parse(history.state.goods).price*10000
+    sale.value.status='1'
     // console.log(JSON.parse(history.state.goods))
     sale.value.goodsid=JSON.parse(history.state.goods).id
     pri.value=JSON.parse(history.state.goods).price*100

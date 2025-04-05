@@ -99,7 +99,7 @@
           <div class="nav-item">
         <van-badge :content="num">
           <van-image
-            @click="openm=true"
+            @click="openChat"
             width="24"
             height="24"
             :src="require('../../assets/icons/talk2.png')"
@@ -170,7 +170,6 @@ import api from '../../api/index'
 const router = useRouter();
 const openm = ref(false);
 const sms = ref();
-const gid = ref();
 const num = ref(0);
 const mesbody = ref([]);
 const goods=ref({
@@ -222,6 +221,10 @@ const user=ref({
     id:'',
     name:'',
     password:'',
+    date:'',
+    prestige:'',
+    coins:'',
+    carcoins:'',
     qq:'',
     wx:'',
     address:'',
@@ -268,10 +271,16 @@ const send = () => {
   discuss.value.content=sms.value
   console.log(discuss.value)
   api.postReq("/mes-service/mes/addBody",discuss.value).then(res=>{
-    console.log(res.data.msg)
-    open.value=false
-    init()
-    sms.value=''
+    console.log(res.data)
+    if(res.data.code==200){
+      ElMessage.success('发布成功');
+      console.log(res.data.msg)
+    // open.value=false
+      init()
+      sms.value=''
+      openm.value=false
+      }
+    
     })   
     
 };
